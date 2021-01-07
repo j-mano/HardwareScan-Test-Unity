@@ -1,0 +1,13 @@
+Todo:
+
+Add performance mesuring of cpu gpu and amount of ram being used.
+
+Add a way to test if dx can be used in some way on the actual hardware (Not just check operating system)
+
+Improve the interface to somthing moore good looking
+
+Add an other interface specifik for mobile devices
+
+Add a way to test if vulkan can be tested on System
+
+Go over moust code for improvments and general commeting
