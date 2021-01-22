@@ -6,6 +6,24 @@ public class get_gpu_api : MonoBehaviour
 {
     public GameObject ProgramBackendHardwarecheck;
 
+    public string getRunningApiSupport()
+    {
+        string RunningApiSupport = "";
+
+        RunningApiSupport = ProgramBackendHardwarecheck.GetComponent<Gpu_api_support>().get_Current_Gpu_api();
+
+        return RunningApiSupport;
+    }
+
+    public string getLatestDX()
+    {
+        string RunningApiSupport = "";
+
+        RunningApiSupport = ProgramBackendHardwarecheck.GetComponent<Gpu_api_support>().get_Latestdxsupport();
+
+        return RunningApiSupport;
+    }
+
     public string getOpenGLSupport()
     {
         string openGlVersion = "";
@@ -19,7 +37,7 @@ public class get_gpu_api : MonoBehaviour
     {
         string metalsupport = "";
 
-        metalsupport = ProgramBackendHardwarecheck.GetComponent<Gpu_api_support>().get_Vulkan_Support();
+        metalsupport = ProgramBackendHardwarecheck.GetComponent<Gpu_api_support>().get_Metal_support();
 
         return metalsupport;
     }
@@ -28,7 +46,7 @@ public class get_gpu_api : MonoBehaviour
     {
         string vulkansupport = "";
 
-        vulkansupport = ProgramBackendHardwarecheck.GetComponent<Gpu_api_support>().get_Metal_support();
+        vulkansupport = ProgramBackendHardwarecheck.GetComponent<Gpu_api_support>().get_Vulkan_Support();
 
         return vulkansupport;
     }

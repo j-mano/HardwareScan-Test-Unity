@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class Calculate_ram_vram_usage : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //private PerformanceCounter ramCounter;
+
     void Start()
     {
-        
+        updateRamUsage();
     }
 
-    // Update is called once per frame
-    void Update()
+    float updateRamUsage()
     {
-        
+        /*ramCounter = new PerformanceCounter("Memory", "Available MBytes", true);
+
+        return UnityEngine.Profiling.Profiler.GetRuntimeMemorySize;*/
+
+        return 0;
+    }
+
+    float getRamUsage()
+    {
+        return updateRamUsage();
     }
 }
