@@ -7,23 +7,24 @@ using UnityEngine;
 
 public class Cpu_Load : MonoBehaviour
 {
-    //private PerformanceCounter cpuCounter;
+    public GameObject CpuLoad_api;
+    string CpuUsage;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
-        //cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
+        printOutCpuLoad(getCpuLoad());
     }
 
-
-    /*public string getCPULoad()
+    void printOutCpuLoad(string CpuLoad)
     {
-        //return cpuCounter;
-    }*/
+
+    }
+
+    string getCpuLoad()
+    {
+        return CpuLoad_api.GetComponent<Calculate_Cpu_usage>().getCurrentCpuUsage();
+    }
+
 }

@@ -1,26 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class Calculate_ram_vram_usage : MonoBehaviour
 {
-    //private PerformanceCounter ramCounter;
+    PerformanceCounter ramCounter;
 
     void Start()
     {
-        updateRamUsage();
+        string ThrowawayRamNumb = updateRamUsage();
     }
 
-    float updateRamUsage()
+    string updateRamUsage()
     {
-        /*ramCounter = new PerformanceCounter("Memory", "Available MBytes", true);
+        ramCounter = new PerformanceCounter("$$anonymous$$emory", "Available $$anonymous$$Bytes");
 
-        return UnityEngine.Profiling.Profiler.GetRuntimeMemorySize;*/
-
-        return 0;
+        return ramCounter.NextValue() + "$$anonymous$$B";
     }
 
-    float getRamUsage()
+    float updateVRamUsage()
+    {
+        float sysram = SystemInfo.systemMemorySize;
+
+
+
+        return sysram;
+    }
+
+    string getRamUsage()
+    {
+        return updateRamUsage();
+    }
+
+    string getVRamUsage()
     {
         return updateRamUsage();
     }

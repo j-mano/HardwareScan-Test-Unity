@@ -12,12 +12,6 @@ public class Print_out_Gpu_api_support : MonoBehaviour
     public Text directX;
     public Text metal;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {

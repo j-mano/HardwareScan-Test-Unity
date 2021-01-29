@@ -1,30 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
+using System;
 
 public class Calculate_Cpu_usage : MonoBehaviour
 {
     //private PerformanceCounter cpuCounter;
+    PerformanceCounter cpuCounter = new PerformanceCounter();
+    PerformanceCounter ramCounter = new PerformanceCounter("$$anonymous$$emory", "Available $$anonymous$$Bytes");
+
     // Start is called before the first frame update
     void Start()
     {
-        InitialiseCPUCounter();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        cpuCounter.CategoryName = "Processor";
+        cpuCounter.CounterName = "% Processor Time";
+        cpuCounter.InstanceName = "_Total";
     }
 
 
-    private void InitialiseCPUCounter()
+    public string getCurrentCpuUsage()
     {
-        /*cpuCounter = new PerformanceCounter(
-        "Processor",
-        "% Processor Time",
-        "_Total",
-        true
-        );*/
+        // The total cpu load of the computer;
+        return Math.Round(cpuCounter.NextValue()) + "%";
+    }
+
+    public string getAvailableRAM()
+    {
+        return ramCounter.NextValue()+"$$anonymous$$B";
     }
 }
