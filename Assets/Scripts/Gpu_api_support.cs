@@ -149,10 +149,6 @@ public class Gpu_api_support : MonoBehaviour
         return OpenCL;
     }
 
-    public bool getVrRedy(){
-        return SystemInfo.supportsRayTracing;
-    }
-
     public string getShaderLevel()
     {
         int shaderintLvl = SystemInfo.graphicsShaderLevel;

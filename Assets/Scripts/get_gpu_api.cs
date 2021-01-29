@@ -36,8 +36,4 @@ public class get_gpu_api : MonoBehaviour
     {
         return ProgramBackendHardwarecheck.GetComponent<Gpu_api_support>().getShaderLevel();
     }
-
-    public bool getVrReady(){
-        return ProgramBackendHardwarecheck.GetComponent<Gpu_api_support>().getVrRedy();
-    }
 }
