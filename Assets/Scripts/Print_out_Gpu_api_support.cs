@@ -9,61 +9,68 @@ public class Print_out_Gpu_api_support : MonoBehaviour
 
     public Text opengl;
     public Text vulkan;
-    public Text directX;
-    public Text metal;
+    public Text directX_metal;
 
     // Update is called once per frame
     void Update()
     {
         // Opengl is planed to be the base of the aplication
         printoutGpuSupportOpenGL(getCurrentRunningApi());
-        printoutGpuSupportVulkan(getVulkansupport());
+        InterfaceOsAdaptation();
+    }
 
+    void InterfaceOsAdaptation(){
+        if(isWindows() || isLinux())
+            printoutGpuSupportVulkan(getVulkansupport());
+        else
+            vulkan.text = "";
+
+        if(isWindows())
+            printoutGpuSupportDirectX(directXSupport());
+        else
+            directX_metal.text = "";
+
+        if(isMac())
+            printoutGpuSupportMetal(getMetalsupport());
+        else
+            directX_metal.text = "";
+    }
+
+    bool isMac(){
+        return interfaceCommunication.GetComponent<get_os>().get_isMac();
+    }
+
+    bool isWindows(){
+        return interfaceCommunication.GetComponent<get_os>().get_isWindows();
+    }
+
+    bool isLinux(){
+        return interfaceCommunication.GetComponent<get_os>().get_isLinux();
     }
 
     string getCurrentRunningApi()
     {
-        string CurrentRunningApi = "";
-
-        CurrentRunningApi = interfaceCommunication.GetComponent<get_gpu_api>().getRunningApiSupport();
-
-        return CurrentRunningApi;
+        return interfaceCommunication.GetComponent<get_gpu_api>().getRunningApiSupport();
     }
 
     string getOpenGlsupport()
     {
-        string openglSupportString = "";
-
-        openglSupportString = interfaceCommunication.GetComponent<get_gpu_api>().getOpenGLSupport();
-
-        return openglSupportString;
+        return interfaceCommunication.GetComponent<get_gpu_api>().getOpenGLSupport();
     }
 
     string getVulkansupport()
     {
-        string VulkanSupportString = "";
-
-        VulkanSupportString = interfaceCommunication.GetComponent<get_gpu_api>().getVulkansupport();
-
-        return VulkanSupportString;
+        return interfaceCommunication.GetComponent<get_gpu_api>().getVulkansupport();
     }
 
     string directXSupport()
     {
-        string directXSupportString = "";
-
-        directXSupportString = interfaceCommunication.GetComponent<get_gpu_api>().getLatestDX();
-
-        return directXSupportString;
+        return interfaceCommunication.GetComponent<get_gpu_api>().getLatestDX();
     }
 
     string getMetalsupport()
     {
-        string getMetalsupport = "";
-
-        getMetalsupport = interfaceCommunication.GetComponent<get_gpu_api>().getmetalsupport();
-
-        return getMetalsupport;
+        return interfaceCommunication.GetComponent<get_gpu_api>().getmetalsupport();
     }
 
     void printoutGpuSupportOpenGL(string openGlSupportString)
@@ -79,12 +86,12 @@ public class Print_out_Gpu_api_support : MonoBehaviour
     void printoutGpuSupportDirectX(string dxSupportString)
     {
         // windows only
-        directX.text = "DirecX Api support version" + dxSupportString;
+        directX_metal.text = "DirecX Api support version" + dxSupportString;
     }
 
     void printoutGpuSupportMetal(string metalSupportString)
     {
         // Mac only
-        metal.text = "Metal support: " + metalSupportString;
+        directX_metal.text = "Metal support: " + metalSupportString;
     }
 }

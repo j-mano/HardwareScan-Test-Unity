@@ -8,46 +8,36 @@ public class get_gpu_api : MonoBehaviour
 
     public string getRunningApiSupport()
     {
-        string RunningApiSupport = "";
 
-        RunningApiSupport = ProgramBackendHardwarecheck.GetComponent<Gpu_api_support>().get_Current_Gpu_api();
-
-        return RunningApiSupport;
+        return ProgramBackendHardwarecheck.GetComponent<Gpu_api_support>().get_Current_Gpu_api();
     }
 
     public string getLatestDX()
     {
-        string RunningApiSupport = "";
-
-        RunningApiSupport = ProgramBackendHardwarecheck.GetComponent<Gpu_api_support>().get_Latestdxsupport();
-
-        return RunningApiSupport;
+        return ProgramBackendHardwarecheck.GetComponent<Gpu_api_support>().get_Latestdxsupport();
     }
 
     public string getOpenGLSupport()
     {
-        string openGlVersion = "";
-
-        openGlVersion = ProgramBackendHardwarecheck.GetComponent<Gpu_api_support>().get_OpenGLVersion();
-
-        return openGlVersion;
+        return ProgramBackendHardwarecheck.GetComponent<Gpu_api_support>().get_OpenGLVersion();
     }
 
     public string getmetalsupport()
     {
-        string metalsupport = "";
-
-        metalsupport = ProgramBackendHardwarecheck.GetComponent<Gpu_api_support>().get_Metal_support();
-
-        return metalsupport;
+        return ProgramBackendHardwarecheck.GetComponent<Gpu_api_support>().get_Metal_support();
     }
 
     public string getVulkansupport()
     {
-        string vulkansupport = "";
+        return ProgramBackendHardwarecheck.GetComponent<Gpu_api_support>().get_Vulkan_Support();
+    }
 
-        vulkansupport = ProgramBackendHardwarecheck.GetComponent<Gpu_api_support>().get_Vulkan_Support();
+    public string getShadersupport()
+    {
+        return ProgramBackendHardwarecheck.GetComponent<Gpu_api_support>().getShaderLevel();
+    }
 
-        return vulkansupport;
+    public bool getVrReady(){
+        return ProgramBackendHardwarecheck.GetComponent<Gpu_api_support>().getVrRedy();
     }
 }

@@ -6,12 +6,6 @@ public class Gpu_api_support : MonoBehaviour
 {
     public GameObject OS_check;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Use unitys opengl core to check version 3.3 to 4.5
     public string get_Current_Gpu_api(){
         string Current_Gpu_api = SystemInfo.graphicsDeviceVersion;
@@ -156,9 +150,7 @@ public class Gpu_api_support : MonoBehaviour
     }
 
     public bool getVrRedy(){
-        bool Vrredy = SystemInfo.supportsRayTracing;
-
-        return Vrredy;
+        return SystemInfo.supportsRayTracing;
     }
 
     public string getShaderLevel()

@@ -23,12 +23,10 @@ public class Calculate_ram_vram_usage : MonoBehaviour
     {
         float sysram = SystemInfo.systemMemorySize;
 
-
-
         return sysram;
     }
 
-    string getRamUsage()
+    public string getRamUsage()
     {
         return updateRamUsage();
     }
