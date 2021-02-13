@@ -11,6 +11,8 @@ public class get_cpu_load : MonoBehaviour
     string CpuUsage;
     string evenCpuUsage;
 
+    List<float> MyList = new List<float>;
+
     void Start()
     {
         Task asynUpdateAvarageCpuLoad = Task.Run(() => { updateStoredEvenCpuLoad(); });

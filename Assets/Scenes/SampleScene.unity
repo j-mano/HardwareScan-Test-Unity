@@ -1621,7 +1621,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Vr - redy?
+  m_Text: RayTracing capability
 --- !u!222 &713616408
 CanvasRenderer:
   m_ObjectHideFlags: 0
