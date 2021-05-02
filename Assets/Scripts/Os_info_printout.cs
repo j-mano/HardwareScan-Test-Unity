@@ -9,23 +9,29 @@ public class Os_info_printout : MonoBehaviour
     public Text osName;
     public Text osVersion_kernel;
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        printOsName(getOsName());
+        printOsName(GetosVersion_kernelName());
+        PrintosFamaily(GetOSFamaily());
     }
 
-    string getOsName()
+    string GetosVersion_kernelName()
     {
-        string OsName = "";
+        return interfacegetOS.GetComponent<get_os>().get_running_operating_system();
+    }
 
-        OsName = interfacegetOS.GetComponent<get_os>().get_running_operating_system();
+    string GetOSFamaily()
+    {
+        return SystemInfo.operatingSystemFamily.ToString();
+    }
 
-        return OsName;
+    void PrintosFamaily(string OsFamaily)
+    {
+        osName.text = OsFamaily;
     }
 
     void printOsName(string osNameInput)
     {
-        osName.text = osNameInput;
+        osVersion_kernel.text = osNameInput;
     }
 }

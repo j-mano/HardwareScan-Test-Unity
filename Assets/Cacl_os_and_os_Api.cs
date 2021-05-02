@@ -4,13 +4,7 @@ using UnityEngine;
 
 public class Cacl_os_and_os_Api : MonoBehaviour
 {
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
+    // Get The current running system os.
     public string getRunningOs()
     {
         string runningos = "";
@@ -20,6 +14,7 @@ public class Cacl_os_and_os_Api : MonoBehaviour
         return runningos;
     }
 
+    // Validate if system is mac os x 10. OSX 9 and erlier not supported.
     public bool getIsMac()
     {
         string os = getRunningOs();
@@ -35,6 +30,7 @@ public class Cacl_os_and_os_Api : MonoBehaviour
         return returnvalue;
     }
 
+    // Validate if system is windows. Validates to work with xp and onward.
     public bool getIsWindows()
     {
         string os = getRunningOs();
@@ -50,6 +46,7 @@ public class Cacl_os_and_os_Api : MonoBehaviour
         return returnvalue;
     }
 
+    // Get specifik version of windows. Windows xp, Vista, 7, 8 or 10.
     public string getWindowsVersion()
     {
         // Checks the os reported by unity and compare it to an list of windows versions. This function is used to trim out exakt version and 64/32 bit version
@@ -75,6 +72,7 @@ public class Cacl_os_and_os_Api : MonoBehaviour
         return resturnstring;
     }
 
+    // Validate if system is Modern version of linux. confirmd to work with distros working with unity system.
     public bool getIsLinux()
     {
         string os = getRunningOs();

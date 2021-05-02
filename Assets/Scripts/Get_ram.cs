@@ -8,6 +8,7 @@ using UnityEngine;
 public class Get_ram : MonoBehaviour
 {
     string ram = "";
+    string Vram = "";
 
     public GameObject Ram_Api;
 
@@ -19,9 +20,15 @@ public class Get_ram : MonoBehaviour
 
     void LoadRamloadFromBackend(){
         ram = Ram_Api.GetComponent<Calculate_ram_vram_usage>().getRamUsage();
+        Vram = Ram_Api.GetComponent<Calculate_ram_vram_usage>().getVRamUsage();
     }
 
     public string GetRamLoad(){
         return ram;
+    }
+
+    public string GetVRamLoad()
+    {
+        return Vram;
     }
 }

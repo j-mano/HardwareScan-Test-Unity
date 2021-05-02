@@ -25,6 +25,15 @@ public class Get_hardware_interface : MonoBehaviour
         return cpuCores;
     }
 
+    public string getCpuArch()
+    {
+        string cpuArch = "";
+
+        cpuArch = ProgramBackendHardwarecheck.GetComponent<Get_Hardware>().get_Cpu_Arch();
+
+        return cpuArch;
+    }
+
     public string getGpuName()
     {
         string gpu = "";

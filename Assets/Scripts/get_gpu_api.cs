@@ -8,7 +8,6 @@ public class get_gpu_api : MonoBehaviour
 
     public string getRunningApiSupport()
     {
-
         return ProgramBackendHardwarecheck.GetComponent<Gpu_api_support>().get_Current_Gpu_api();
     }
 

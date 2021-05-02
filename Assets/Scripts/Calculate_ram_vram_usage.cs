@@ -2,37 +2,51 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using Unity.Profiling;
 
 public class Calculate_ram_vram_usage : MonoBehaviour
 {
-    PerformanceCounter ramCounter;
+    string _statsText;
+    ProfilerRecorder _totalSystemMemoryRecorder;
+    ProfilerRecorder _totalSystemVideoMemoryRecorder;
+
+    void OnEnable()
+    {
+        _totalSystemMemoryRecorder = ProfilerRecorder.StartNew(ProfilerCategory.Memory, "System Used Memory");
+        _totalSystemVideoMemoryRecorder = ProfilerRecorder.StartNew(ProfilerCategory.Memory, "Video Reserved Memory");
+    }
+    void OnDisable()
+    {
+        _totalSystemMemoryRecorder.Dispose();
+    }
 
     void Start()
     {
-        string ThrowawayRamNumb = updateRamUsage();
+
     }
 
-    string updateRamUsage()
-    {
-        ramCounter = new PerformanceCounter("$$anonymous$$emory", "Available $$anonymous$$Bytes");
-
-        return ramCounter.NextValue() + "$$anonymous$$B";
-    }
-
-    float updateVRamUsage()
-    {
-        float sysram = SystemInfo.systemMemorySize;
-
-        return sysram;
-    }
-
+    // Total system ramusage including casht ram.
     public string getRamUsage()
     {
-        return updateRamUsage();
-    }
+        var sb = new System.Text.StringBuilder(500);
+        if (_totalSystemMemoryRecorder.Valid)
+            {
+                sb.AppendLine($"{_totalSystemMemoryRecorder.LastValue}");
+            }
+            
 
-    string getVRamUsage()
+        return sb.ToString();
+        }
+
+    // Vram used by the aplicatione. planed to change it to total system vram when unity engien supports it.
+    public string getVRamUsage()
     {
-        return updateRamUsage();
+        var sb = new System.Text.StringBuilder(500);
+        if (_totalSystemVideoMemoryRecorder.Valid)
+        {
+            sb.AppendLine($"{_totalSystemVideoMemoryRecorder.LastValue}");
+        }
+
+        return sb.ToString();
     }
 }

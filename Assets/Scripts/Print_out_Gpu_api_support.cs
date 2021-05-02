@@ -7,33 +7,87 @@ public class Print_out_Gpu_api_support : MonoBehaviour
 {
     public GameObject interfaceCommunication;
 
-    public Text opengl;
-    public Text vulkan;
-    public Text directX_metal;
+    // interfacePrintOutText
+    public Text CurrentlyRunningApiPrintOut;
+    public Text GpuApiMessage;
+    public Text TesselationSupport;
+    public Text ShaderLVL;
 
-    // Update is called once per frame
     void Update()
     {
-        // Opengl is planed to be the base of the aplication
-        printoutGpuSupportOpenGL(getCurrentRunningApi());
+        printoutGpuSupportCurrentlyRunning(getCurrentRunningApi());
         InterfaceOsAdaptation();
+        printoutTesselationSupport(SupportTesselation());
+        PrintShaderLVL(shaderlvl());
     }
 
+    string shaderlvl()
+    {
+        int shadeModels = SystemInfo.graphicsShaderLevel;
+        string returnstring = "";
+
+        // https://docs.unity3d.com/ScriptReference/SystemInfo-graphicsShaderLevel.html
+        // The if code here is if the underlaying unity system is upgraded without taking this to account. An exeption will say
+        if (shadeModels > 50)
+        {
+            returnstring = "Shader Model 5.0 (DX11.0) or above";
+        }
+        else
+        {
+            switch (shadeModels)
+            {
+                case 50:
+                    returnstring = "Shader Model 5.0 (DX11.0) or above";
+                    break;
+                case 46:
+                    returnstring = "OpenGL 4.1 capabilities (Shader Model 4.0 + tessellation)";
+                    break;
+                case 45:
+                    returnstring = "Metal / OpenGL ES 3.1 capabilities (Shader Model 3.5 + compute shaders)";
+                    break;
+                case 40:
+                    returnstring = "Shader Model 4.0 (DX10.0)";
+                    break;
+                case 35:
+                    returnstring = "OpenGL ES 3.0 capabilities (Shader Model 3.0 + integers, texture arrays, instancing)";
+                    break;
+                case 30:
+                    returnstring = "Shader Model 3.0";
+                    break;
+                case 25:
+                    returnstring = "Shader Model 2.5 (DX11 feature level 9.3 feature set)";
+                    break;
+                case 20:
+                    returnstring = "Shader Model 2.0.";
+                    break;
+                default:
+                    returnstring = "No shademodel found by unity enginge. Too old or do not have any.";
+                break;
+            }
+        }
+
+        return returnstring;
+    }
+
+    // UI interface dependent on wha os you running.
     void InterfaceOsAdaptation(){
-        if(isWindows() || isLinux())
-            printoutGpuSupportVulkan(getVulkansupport());
-        else
-            vulkan.text = "";
+        GpuApiMessage.text = "";
 
-        if(isWindows())
-            printoutGpuSupportDirectX(directXSupport());
-        else
-            directX_metal.text = "";
+        if(isWindows() || isLinux()){
 
-        if(isMac())
-            printoutGpuSupportMetal(getMetalsupport());
-        else
-            directX_metal.text = "";
+        }
+
+        if(isLinux()){
+
+        }
+
+        if(isWindows()){
+
+        }
+
+        if(isMac()){
+            
+        }
     }
 
     bool isMac(){
@@ -46,6 +100,10 @@ public class Print_out_Gpu_api_support : MonoBehaviour
 
     bool isLinux(){
         return interfaceCommunication.GetComponent<get_os>().get_isLinux();
+    }
+
+    bool SupportTesselation(){
+        return SystemInfo.supportsTessellationShaders;
     }
 
     string getCurrentRunningApi()
@@ -73,25 +131,40 @@ public class Print_out_Gpu_api_support : MonoBehaviour
         return interfaceCommunication.GetComponent<get_gpu_api>().getmetalsupport();
     }
 
+    void printoutGpuSupportCurrentlyRunning(string CurrentlyRunningApiSupportString)
+    {
+        CurrentlyRunningApiPrintOut.text = "Currently running api: " + CurrentlyRunningApiSupportString;
+    }
+
+    void printoutTesselationSupport(bool printoutTesselationSupport)
+    {
+        TesselationSupport.text = "Tesselation Support: " + printoutTesselationSupport;
+    }
+
+    void PrintShaderLVL(string inputshaderversion)
+    {
+        ShaderLVL.text = "ShaderLvl: " + inputshaderversion;
+    }
+
     void printoutGpuSupportOpenGL(string openGlSupportString)
     {
-        opengl.text = "Currently running api: " + openGlSupportString;
+        //opengl.text = "openGlapi support: " + openGlSupportString;
     }
 
     void printoutGpuSupportVulkan(string vulkanSupportString)
     {
-        vulkan.text = "VulkanApi support: " + vulkanSupportString;
+        //vulkan.text = "VulkanApi support: " + vulkanSupportString;
     }
 
     void printoutGpuSupportDirectX(string dxSupportString)
     {
         // windows only
-        directX_metal.text = "DirecX Api support version" + dxSupportString;
+        //directX_metal.text = "DirecX Api support version" + dxSupportString;
     }
 
     void printoutGpuSupportMetal(string metalSupportString)
     {
         // Mac only
-        directX_metal.text = "Metal support: " + metalSupportString;
+        //directX_metal.text = "Metal support: " + metalSupportString;
     }
 }

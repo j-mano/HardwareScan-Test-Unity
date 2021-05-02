@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Globalization;
 
-// 
 public class Get_Hardware : MonoBehaviour
 {
     // cpu assumed 64-bit by default due to so many systems today are 64-bit. And this aplication is using unity (wich pushing / forcing 64bit compling on moust of the supported platforms)
-    string cpu = "", cpu_arch = "64-Bit", gpu = "", motherboard = "";
+    string cpu = "CpuName", cpu_arch = "Archtecture", gpu = "GpuName", motherboard = "MotherBoard";
     float ram = 0, vram = 0;
     int cpu_cores = 0, cpu_tread = 0;
 
@@ -17,9 +17,11 @@ public class Get_Hardware : MonoBehaviour
         checkCpu();
         checkRamVram();
         checkCpuCores();
+        checkCpuArch();
     }
 
-    void checkCpu(){
+    void checkCpu()
+    {
         cpu = SystemInfo.processorType;
     }
 
@@ -37,24 +39,33 @@ public class Get_Hardware : MonoBehaviour
         vram = SystemInfo.graphicsMemorySize;
     }
 
-    /* Temporaly commented out and is added in when android and ios aplications are developt.
-     * void checkCpuArch(){
-        if (CultureInfo.InvariantCulture.CompareInfo.IndexOf(SystemInfo.processorType, "ARM", CompareOptions.IgnoreCase) >= 0)
+    void checkCpuArch(){
+        try
         {
-            if (Environment.Is64BitProcess)
-                cpu_arch = "ARM64";
+            // Print out the architecture of the running process.
+            // We can use the Environment property Is64BitProcess along with SystemInfo.processorType to figure it out.
+            // Do a case insensitive string check.
+            if (CultureInfo.InvariantCulture.CompareInfo.IndexOf(SystemInfo.processorType, "ARM", CompareOptions.IgnoreCase) >= 0)
+            {
+                if (System.Environment.Is64BitProcess)
+                    cpu_arch = "ARM64";
+                else
+                    cpu_arch = "ARM32";
+            }
             else
-                cpu_arch = "ARM";
+            {
+                // Since the unity engienge only support intel / amd x86 and arm is it assumed that it is x86/64 bit intel / amd
+                if (System.Environment.Is64BitProcess)
+                    cpu_arch = "x86_64";
+                else
+                    cpu_arch = "x86"; 
+            }
         }
-        else
+        catch
         {
-            // Must be in the x86 family.
-            if (Environment.Is64BitProcess)
-                cpu_arch = "64-Bit";
-            else
-                cpu_arch = "32-Bit";
+            cpu_arch = "fail to get artcheteture";
         }
-    }*/
+    }
 
     public string get_Gpu(){
         return gpu;

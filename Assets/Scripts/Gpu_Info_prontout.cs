@@ -12,34 +12,20 @@ public class Gpu_Info_prontout : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         printoutGpuName(getGpuName());
         printoutVramAmount(getVram());
     }
 
     string getGpuName()
     {
-        string GpuName = "";
 
-        GpuName = innerinterfaceCommunication.GetComponent<Get_hardware_interface>().getGpuName();
-
-        return GpuName;
+        return innerinterfaceCommunication.GetComponent<Get_hardware_interface>().getGpuName();
     }
 
     float getVram()
     {
-        float GpuVram = 0;
-
-        GpuVram = innerinterfaceCommunication.GetComponent<Get_hardware_interface>().getGpuVram();
-
-        return GpuVram;
+        return innerinterfaceCommunication.GetComponent<Get_hardware_interface>().getGpuVram();
     }
-
     void printoutGpuName(string GpuNameInput)
     {
         GpuName.text = GpuNameInput;
@@ -47,6 +33,6 @@ public class Gpu_Info_prontout : MonoBehaviour
 
     void printoutVramAmount(float VramInput)
     {
-        GpuVram.text = VramInput.ToString();
+        GpuVram.text = "Amount of videoram: " + VramInput.ToString() + "MB";
     }
 }

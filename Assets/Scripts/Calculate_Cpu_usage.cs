@@ -6,11 +6,10 @@ using System;
 
 public class Calculate_Cpu_usage : MonoBehaviour
 {
-    //private PerformanceCounter cpuCounter;
+    // Private PerformanceCounter cpuCounter;
     PerformanceCounter cpuCounter = new PerformanceCounter();
-    PerformanceCounter ramCounter = new PerformanceCounter("$$anonymous$$emory", "Available $$anonymous$$Bytes");
 
-    // Start is called before the first frame update
+    // Setting up the system parameters.
     void Start()
     {
         cpuCounter.CategoryName = "Processor";
@@ -18,15 +17,9 @@ public class Calculate_Cpu_usage : MonoBehaviour
         cpuCounter.InstanceName = "_Total";
     }
 
-
+    // The total cpu load of the computer;
     public string getCurrentCpuUsage()
     {
-        // The total cpu load of the computer;
         return Math.Round(cpuCounter.NextValue()) + "%";
-    }
-
-    public string getAvailableRAM()
-    {
-        return ramCounter.NextValue()+"$$anonymous$$B";
     }
 }

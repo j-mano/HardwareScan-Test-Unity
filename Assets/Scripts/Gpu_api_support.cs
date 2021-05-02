@@ -14,16 +14,16 @@ public class Gpu_api_support : MonoBehaviour
     }
 
     public string get_OpenGLVersion(){
-        string openGL = "";
+        string openGL = "No opengl support detected.";
 
         return openGL;
     }
 
     public string get_Vulkan_Support()
     {
-        string openGL = "";
+        string Vulkan = "No vulkan support detected.";
 
-        return openGL;
+        return Vulkan;
     }
 
     public string get_DX9_Support(){
@@ -45,9 +45,7 @@ public class Gpu_api_support : MonoBehaviour
         foreach (string windowsVersion in listofWindowsVersions)
         {
             if (Windowsversion.Contains(windowsVersion))
-            {
                 dxVersion = "Sowftware support";
-            }
         }
 
         return dxVersion;
@@ -75,6 +73,7 @@ public class Gpu_api_support : MonoBehaviour
         string dxVersion = "";
 
         string Windowsversion = OS_check.GetComponent<Cacl_os_and_os_Api>().getWindowsVersion();
+
         // Windows versions supporting dx11. 
         string[] listofWindowsVersions = new string[] { "Windows 10" };
 
@@ -137,30 +136,17 @@ public class Gpu_api_support : MonoBehaviour
         return dxVersion;
     }
 
-    public string getCudaVersion(){
-        string cudaVersion = "";
-
-        return cudaVersion;
-    }
-
-    public string getOpenCLVersion(){
-        string OpenCL = "";
-
-        return OpenCL;
-    }
-
     public string getShaderLevel()
     {
         int shaderintLvl = SystemInfo.graphicsShaderLevel;
 
-        string shaderLVL = "shaderlevl: " + shaderintLvl.ToString();
+        string shaderLVL = "Shaderlevl: " + shaderintLvl.ToString();
 
         return shaderLVL;
     }
 
+    // Return if the gpu supports unitys versions of raytracing. Going to be dependent of version of unity version to detect if gpu support raytracing.
     public bool getRayTracing(){
-        bool RayTracing = SystemInfo.supportsRayTracing;
-
-        return RayTracing;
+        return SystemInfo.supportsRayTracing;
     }
 }

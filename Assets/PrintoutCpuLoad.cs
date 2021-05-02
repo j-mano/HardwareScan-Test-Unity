@@ -7,27 +7,26 @@ public class PrintoutCpuLoad : MonoBehaviour
 {
     public GameObject Cpu_Api;
     public Text Txt_CpuLoad;
-    public Text Txt_CpuAvarageLoad;
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        PrintOutCpuInfo(GetCpuLoadInfo(), GetCpuAvarage10SecLoadInfo());
+        // This funktion is setting the Framrate How fast the gui is updating.
+        // Is set to lower to make it easier to read.
+        InvokeRepeating("FixetrateUpdate", 0, 1f);
     }
 
-    void PrintOutCpuInfo(string inputCpuLoadString, string inputCpuAvarageLoadString)
+    void FixetrateUpdate()
+    {
+        PrintOutCpuInfo(GetCpuLoadInfo());
+    }
+
+    void PrintOutCpuInfo(string inputCpuLoadString)
     {
         Txt_CpuLoad.text = "Cpu Load: " + inputCpuLoadString;
-        Txt_CpuAvarageLoad.text = "Avarage Cpu Load: " + inputCpuAvarageLoadString;
     }
 
     string GetCpuLoadInfo()
     {
         return Cpu_Api.GetComponent<get_cpu_load>().GetCpuLoad();
-    }
-
-    string GetCpuAvarage10SecLoadInfo()
-    {
-        return Cpu_Api.GetComponent<get_cpu_load>().GetAvarageCpuLoad10sec();
     }
 }

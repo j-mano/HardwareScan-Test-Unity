@@ -24,6 +24,6 @@ public class Ram_info_print_out : MonoBehaviour
 
     void printRamAmount(float RamamountInput)
     {
-        SysMem.text = RamamountInput.ToString() + "MB";
+        SysMem.text = "System ram: " + RamamountInput.ToString() + "MB";
     }
 }
