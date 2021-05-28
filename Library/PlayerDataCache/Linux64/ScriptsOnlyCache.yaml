@@ -935,4 +935,4 @@ ScriptsOnlyBuild:
   platform: 24
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: /home/joachim/Downloads/Linux/Hardwarescan.x86_64
+  playerPath: /home/joachim/Downloads/HardwareScan_Linux_64_bit_Vulkan.x86_64
